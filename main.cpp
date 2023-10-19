@@ -7,7 +7,10 @@
 
 SDFileSystem sd(p5, p6, p7, p8, "sd"); //SD card
 uLCD_4DGL uLCD(p9,p10,p11); // serial tx, serial rx, reset pin;
+<<<<<<< HEAD
 Serial blue(p28,p27);
+=======
+>>>>>>> 952f06b65f49484bba6a7a50a3cb060227b2fd18
 
 AnalogOut DACout(p18);
 wave_player waver(&DACout);
@@ -19,6 +22,7 @@ PwmOut RGBLED_b(p25);
 
 const int color_arr[] = {0x00ff00, 0x00ffff, 0xff7700, 0xffff00, 
                          0x0000ff, 0xff00dd, 0xff0000, 0x9900ff};
+
 const float rgb_arr[8][3] = {{1.0f, 0.0f, 1.0f}, {1.0f, 0.0f, 0.0f},
                            {0.0f, 0.5333f, 1.0f}, {0.0f, 0.0f, 1.0f}, 
                            {1.0f, 1.0f, 0.0f}, {0.0f, 1.0f, 0.1333f},
@@ -125,7 +129,8 @@ void thread4(void const *args)
             RGBLED_b = rgb_arr[index][2];
         }
 
-        i++;
+        i++;     // thread loop
+
         Thread::wait(100);
        
     }
@@ -134,6 +139,7 @@ void thread4(void const *args)
 
 int main()
 {
+
     char bnum = 0;
     printf("Test\n");
     Thread t1(thread1);
@@ -143,6 +149,7 @@ int main()
     uLCD.baudrate(400000);
 
     while (true) {
+
         if (blue.getc()=='!') {
             if (blue.getc()=='B') { //button data
                 bnum = blue.getc(); //button number
@@ -153,6 +160,6 @@ int main()
                 }
             }
         }
-        Thread::wait(500);
+       Thread::wait(500);
     }
 }
